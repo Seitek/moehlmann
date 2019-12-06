@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 //const passport = require('passport');
 const path = require('path');
+var cors = require('cors')
 
 // Add Routes
 //const users = require('./routes/api/users');
@@ -16,6 +17,7 @@ const fahrten = require('./routes/api/fahrten');
 
 const app = express();
 
+app.use(cors())
 // Body-parser Middleware
 app.use(bodyParser.urlencoded({
     extended: false
