@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 
 // DB Config
-const db = 'mongodb://127.0.0.1:27017/moehlmann';
+const db = 'mongodb://18.196.103.250:27017/moehlmann';
 
 // Connect Mongo
 mongoose

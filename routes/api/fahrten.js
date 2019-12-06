@@ -19,12 +19,20 @@ router.get('/', (req, res) => {
 // @desc    Get All Fahrten
 // @access  Public
 router.get('/:code', (req, res) => {
+
+    let test = 0;
     Fahrten.find({nutzercode: req.params.code})
         .sort({ date: -1 })
         .then(fahrten => {
-            if (!fahrten.ist_abgeschlossen && !fahrten.ist_geloescht) {
-                   return res.json(fahrten)
-            }
+            let test = {};
+
+            fahrten.map(fahrten => {
+                if (fahrten.ist_geloescht === false && fahrten.ist_abgeschlossen === false){
+                    test = fahrten;
+                }
+            })
+            
+            res.json(test)
         })
         .catch(err => res.status(404).json({
             message: 'Keine Fahrt mit diesem Code gefunden.'
@@ -54,6 +62,32 @@ router.post('/', (req, res) => {
     });
 
     newFahrt.save().then(fahrten => res.json(fahrten));
+});
+
+// @route   POST api/fahrten
+// @desc    Create A Fahrt
+// @access  Public
+router.post('/:auftragnr', (req, res) => {
+    const test = {ist_abgeschlossen: true}
+   Fahrten.findOneAndUpdate({auftragnr: req.params.auftragnr}, {$set: test}, {new: true})
+   .then( fahrten => res.status(200).json({message: 'OK'}))
+   .catch(error => {
+    res.status(400).json({message: 'Auftrag nicht gefunden.'})
+   });
+    
+});
+
+// @route   POST api/fahrten
+// @desc    Create A Fahrt
+// @access  Public
+router.post('/abbruch/:auftragnr', (req, res) => {
+    const test = {ist_geloescht: true}
+   Fahrten.findOneAndUpdate({auftragnr: req.params.auftragnr}, {$set: test}, {new: true})
+   .then( fahrten => res.status(200).json({message: 'OK'}))
+   .catch(error => {
+    res.status(400).json({message: 'Auftrag nicht gefunden.'})
+   });
+    
 });
 
 
