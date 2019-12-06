@@ -17,7 +17,7 @@ const fahrten = require('./routes/api/fahrten');
 
 const app = express();
 
-//app.use(cors())
+app.use(cors())
 // Body-parser Middleware
 app.use(bodyParser.urlencoded({
     extended: false
