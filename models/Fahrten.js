@@ -19,7 +19,7 @@ const FahrtenSchema = new Schema({
         type: String,
         required: true
     },
-    vonStraße: {
+    vonStrasse: {
         type: String,
         required: true
     },
@@ -39,7 +39,7 @@ const FahrtenSchema = new Schema({
         type: String,
         required: true
     },
-    nachStraße: {
+    nachStrasse: {
         type: String,
         required: true
     },

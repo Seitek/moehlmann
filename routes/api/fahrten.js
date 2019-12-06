@@ -21,7 +21,11 @@ router.get('/', (req, res) => {
 router.get('/:code', (req, res) => {
     Fahrten.find({nutzercode: req.params.code})
         .sort({ date: -1 })
-        .then(fahrten => res.json(fahrten))
+        .then(fahrten => {
+            if (!fahrten.ist_abgeschlossen && !fahrten.ist_geloescht) {
+                   return res.json(fahrten)
+            }
+        })
         .catch(err => res.status(404).json({
             message: 'Keine Fahrt mit diesem Code gefunden.'
         }));
@@ -36,12 +40,12 @@ router.post('/', (req, res) => {
         auftragnr: req.body.auftragnr,
         kundeVorname: req.body.kundeVorname,
         kundeNachname: req.body.kundeNachname,
-        vonStraße: req.body.vonStraße,
+        vonStrasse: req.body.vonStraße,
         vonHausnummer: req.body.vonHausnummer,
         vonPlz: req.body.vonPlz,
         vonOrt: req.body.vonOrt,
         vonUhrzeit: req.body.vonUhrzeit,
-        nachStraße: req.body.nachStraße,
+        nachStrasse: req.body.nachStraße,
         nachHausnummer: req.body.nachHausnummer,
         nachPlz: req.body.nachPlz,
         nachOrt: req.body.nachOrt,
