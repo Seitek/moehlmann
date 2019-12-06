@@ -21,19 +21,9 @@ router.get('/', (req, res) => {
 router.get('/:code', (req, res) => {
 
     let test = 0;
-    Fahrten.find({nutzercode: req.params.code})
+    Fahrten.find({nutzercode: req.params.code, ist_abgeschlossen: false, ist_geloescht: false})
         .sort({ date: -1 })
-        .then(fahrten => {
-            let test = {};
-
-            fahrten.map(fahrten => {
-                if (fahrten.ist_geloescht === false && fahrten.ist_abgeschlossen === false){
-                    test = fahrten;
-                }
-            })
-            
-            res.json(test)
-        })
+        .then(fahrten => res.json(fahrten))
         .catch(err => res.status(404).json({
             message: 'Keine Fahrt mit diesem Code gefunden.'
         }));
