@@ -1,0 +1,102 @@
+img {
+  width: 100%;
+}
+
+.landing {
+  position: relative;
+  /*background: url('./img/showcase.jpg') no-repeat;*/
+  background-size: cover;
+  background-position: center;
+  /*height: 100vh;*/
+  margin-top: -24px;
+  /*margin-bottom: -50px;*/
+}
+
+.landing-inner {
+  padding-top: 80px;
+}
+/*
+.dark-overlay {
+  background-color: rgba(7, 20, 3, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}*/
+
+a:hover {
+  color: white;
+}
+
+.card-form {
+  opacity: 0.9;
+}
+
+.latest-profiles-img {
+  width: 40px;
+  height: 40px;
+}
+
+.form-control::placeholder {
+  color: #bbb !important;
+}
+
+nav .navbar a .nav-link {
+  color: black !important;
+}
+
+.news {
+  background-color: #057e354b;
+}
+
+.test {
+  width: 80%;
+}
+
+.form-control:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0rem rgba(40, 167, 69, 0.25);
+}
+
+.backend {
+  background-color: #f5f5f5;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  background-color: #f5f5f5;
+}
+
+body {
+  margin-bottom: 100px;
+}
+
+.vl {
+  border-left: 2px solid grey;
+  height: 200px;
+}
+
+.fa-question-circle{
+  color: #28a745;
+}
+
+.linktext:hover{
+  color: black;
+  text-decoration-line: none;
+}
+
+.btn-standard{
+  background-color: #057e36;
+  color: white;
+}
+
+.btn-standard:hover{
+  background-color: #046b2d;
+  color: white;
+}
+
+.hiddenRow {
+  padding: 0 !important;
+}

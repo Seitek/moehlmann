@@ -1,0 +1,43 @@
+.navbar{   
+    -webkit-box-shadow: 0px 7px 22px -8px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px 7px 22px -8px rgba(0,0,0,0.45);
+    box-shadow: 0px 7px 22px -8px rgba(0,0,0,0.45);
+    display: block !important;
+    padding: 0;
+    }
+    
+    .navbar-light .navbar-nav .nav-link {
+    /*color: rgb(19, 19, 19);*/
+    color: #009ee3;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-left: 1em;
+    }
+    
+    #register{
+        background-color: #057e36;
+        color: white;
+    }
+    
+    #register:hover{
+        background-color: #046b2d;
+        color: white;
+    }
+    
+    #login{
+        background-color: #009ee3;
+        color: white;
+    }
+    
+    #login:hover{
+        background-color: #017aad;
+        color: white;
+    }
+    
+    #brand{
+        width: 40%;
+    }
+    
+    .navbar-btn{
+        margin-right: 10px;
+    }
