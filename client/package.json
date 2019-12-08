@@ -21,8 +21,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "PORT=3002 react-scripts start",
-    "start-win": "set PORT=3002 && react-scripts start",
+    "start": "set PORT=3002 && react-scripts start",
+    "startwin": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,5 +42,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5002"
+  "proxy": "http://18.196.103.250:5002"
 }

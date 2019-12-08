@@ -8,21 +8,26 @@ import { connect } from 'react-redux';
 //import { getGroupPosts, getUserPosts, deletePost } from '../../actions/postActions';
 //import MyPosts from './myPosts';
 //import GroupPosts from './groupPosts';
-//import OnlinePosts from './onlinePosts';
+import Nutzerliste from './nutzerListe';
+import Auftragliste from './auftragListe';
 //import SelectListGroup from '../common/SelectListGroup';
+import {getNutzers} from '../../actions/nutzerActions';
+import {getFahrten} from '../../actions/fahrtenActions';
 
 import './css/Dashboard.css';
 
 class Dashboard extends Component {
     componentDidMount() {
-      
+        this.props.getNutzers();
+        this.props.getFahrten();
     }
 
     render() {
       //  const { user } = this.props.auth;
      //   const { profile, loading } = this.props.profile;
-  
-
+     const { nutzers } = this.props.nutzer;
+     const { fahrten } = this.props.fahrten;
+    
         let dashboardContent;
         // Ladebildschirm einbinden
        
@@ -35,13 +40,13 @@ class Dashboard extends Component {
 
                         <div className="row">
                             <div className="col-md-12 py-2 my-3 fenster">
-                                Post 1
+                                <Auftragliste/>
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col py-2 my-3 mr-2 fenster f-halb">
-                                Post 2
+                                <Nutzerliste/>
                             </div>
 
                             <div className="col py-2 my-3 ml-2 fenster f-halb">
@@ -66,8 +71,8 @@ class Dashboard extends Component {
                         <div className="col-md-6">
                             <div className="display-4 mt-3 float-right">
                                 
-                                <Link to="/manage-group" className="btn btn-secondary ml-1" >Nutzer bearbeiten</Link>
-                                <Link to="/manage-group" className="btn btn-secondary ml-1" >Kunde bearbeiten</Link>
+                                <Link to="/manage-group" className="btn btn-secondary ml-1" >Neuer Nutzer</Link>
+                                <Link to="/manage-group" className="btn btn-secondary ml-1" >Neuer Kunde</Link>
                                 <Link to="/settings" className="btn btn-secondary ml-1">Einstellungen</Link>
                             </div>
                         </div>
@@ -86,20 +91,16 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-    getGroupPosts: PropTypes.func.isRequired,
-    getCurrentProfile: PropTypes.func.isRequired,
-    getUserPosts: PropTypes.func.isRequired,
-    deletePost: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    getNutzers: PropTypes.func.isRequired,
+    getFahrten: PropTypes.func.isRequired,
+    nutzer: PropTypes.object.isRequired,
+    fahrten: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    profile: state.profile,
-    post: state.post,
-    auth: state.auth
+    nutzer: state.nutzer,
+    fahrten: state.fahrten
 });
 
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, {getNutzers, getFahrten})(Dashboard);
