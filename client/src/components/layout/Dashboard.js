@@ -65,7 +65,7 @@ class Dashboard extends Component {
                 <Link to="/neuer-auftrag" className="btn btn-secondary ml-1">
                   Neuer Auftrag
                 </Link>
-                <Link to="/manage-group" className="btn btn-secondary ml-1">
+                <Link to="/neu-nutzer" className="btn btn-secondary ml-1">
                   Neuer Nutzer
                 </Link>
                 <Link to="/manage-group" className="btn btn-secondary ml-1">

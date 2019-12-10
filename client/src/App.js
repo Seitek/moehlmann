@@ -15,7 +15,7 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Dashboard from './components/layout/Dashboard';
 import Footer from './components/layout/Footer';
-
+import NeuNutzer from './components/neuForm/neuerNutzer';
 
 class App extends Component {
   render(){
@@ -28,7 +28,7 @@ class App extends Component {
         <Route exact path="/" component={Dashboard} />
 
         <div className="container-fluid backend">
-         
+         <Route exact path="/neu-nutzer" component={NeuNutzer} />
           
         
         </div>

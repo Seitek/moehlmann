@@ -7,41 +7,20 @@ import PropTypes from "prop-types";
 import { createNutzer } from "../../actions/nutzerActions";
 
 let test;
-class addPost extends Component {
+class addNutzer extends Component {
   constructor(props) {
     super(props);
 
-    const html = "Kein Inhalt";
-    const contentBlock = htmlToDraft(html);
-    if (contentBlock) {
-      const contentState = ContentState.createFromBlockArray(
-        contentBlock.contentBlocks
-      );
-      const editorState = EditorState.createWithContent(contentState);
-      this.state = {
-        editorState
-      };
-    }
-
     this.state = {
-      title: "",
-      description: "",
-      text: "",
-      tags: "",
-      category: "",
-      group: "",
-      // likes: [],
-      //comments: {},
-      files: "",
-      role: 1,
-      post_deleted: false,
-      errors: {},
-      schulfach: ""
+      vorname: '',
+      nachname: '',
+      code: '',
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleEditorChange = this.handleEditorChange.bind(this);
+    //this.handleEditorChange = this.handleEditorChange.bind(this);
     // this.onEditorStateChange = this.onEditorStateChange.bind(this);
     // this.handleEditorChange = this.handleEditorChange.bind(this);
   }
@@ -54,69 +33,28 @@ class addPost extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { profile } = this.props.profile;
 
-    const postData = {
-      title: this.state.title,
-      description: this.state.description,
-      // text: draftToHtml(convertToRaw(this.state.editorState.getCurrentContent())),
-      text: this.state.text,
-      tags: this.state.tags,
-      category: this.state.category,
-      role: this.state.role,
-      group: profile.group
+    const nutzerData = {
+      vorname: this.state.vorname,
+      nachname: this.state.nachanme,
+      code: this.state.code
     };
 
-    this.props.createPost(postData, this.props.history);
+    this.props.createNutzer(nutzerData, this.props.history);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
     const { errors } = this.state;
 
-    const options2 = [
-      { label: "Schulfach", value: 0 },
-      { label: "Deutsch", value: "Deutsch" },
-      { label: "Mathematik", value: "Mathematik" },
-      { label: "Sachunterricht", value: "Sachunterricht" },
-      { label: "Geographie / Erdkunde", value: "Geographie / Erdkunde" },
-      { label: "Religion", value: "Religion" },
-      { label: "Englisch", value: "Englisch" },
-      { label: "Französisch", value: "Französisch" },
-      { label: "Spanisch", value: "Spanisch" },
-      { label: "Latein", value: "Latein" },
-      { label: "Niederländisch", value: "Niederländisch" },
-      { label: "Plattdeutsch", value: "Plattdeutsch" },
-      { label: "Saterfriesisch", value: "Saterfriesisch" }
-    ];
-
-    if (e.target.value === "Schulfach") {
-      test = (
-        <SelectListGroup
-          placeholder="Schulfach"
-          name="schulfach"
-          value={this.state.schulfach}
-          options={options2}
-          onChange={this.onChange}
-          error={errors.category}
-        />
-      );
-    }
+   
+    
   }
 
   render() {
     const { errors } = this.state;
 
     //select options for categorys
-    const options = [
-      { label: "Kategorie", value: 0 },
-      { label: "Geschichte", value: "Geschichte" },
-      { label: "Kultur", value: "Kultur" },
-      { label: "Musik", value: "Musik" },
-      { label: "Politik/Wirtschaft", value: "Politik/Wirtschaft" },
-      { label: "Sport", value: "Sport" },
-      { label: "Schulfach", value: "Schulfach" }
-    ];
 
     return (
       <div className="add-post">
@@ -127,45 +65,38 @@ class addPost extends Component {
                 <i className="fas fa-angle-left text-info" /> Zurück zum
                 Dashboard
               </Link>
-              <h1 className="display-4 text-center">Beitrag erstellen</h1>
-              <p className="lead text-center">Erstelle einen neuen Beitrag.</p>
+              <h1 className="display-4 text-center">Nutzer erstellen</h1>
+              <p className="lead text-center">Erstelle einen neuen Nutzer.</p>
               <small className="d-block pb-3">* = Pflichtfelder</small>
               <form onSubmit={this.onSubmit}>
-                <TextFieldGroup
-                  placeholder="* Titel"
-                  name="title"
-                  value={this.state.title}
+              <TextFieldGroup
+                  placeholder="* Vorname"
+                  name="vorname"
+                  value={this.state.vorname}
                   onChange={this.onChange}
-                  error={errors.title}
+                  error=''
                 />
 
                 <TextFieldGroup
-                  placeholder="Beschreibung"
-                  name="description"
-                  value={this.state.description}
+                  placeholder="Nachname"
+                  name="nachname"
+                  value={this.state.nachname}
                   onChange={this.onChange}
-                  error={errors.description}
+                  error=''
                 />
 
-                <SelectListGroup
-                  placeholder="Kategorie"
-                  name="category"
-                  value={this.state.category}
-                  options={options}
-                  onChange={this.onChange}
-                  error={errors.category}
-                />
+                
                 {test}
                 <TextFieldGroup
-                  placeholder="Stichpunkte"
-                  name="tags"
-                  value={this.state.tags}
+                  placeholder="Code"
+                  name="code"
+                  value={this.state.code}
                   onChange={this.onChange}
-                  error={errors.tags}
-                  info="Stichpunkte werden mit einem Komma getrennt."
+                  error=''
+                  info="Der Code dient zur Anmeldung in der App."
                 />
 
-                <h4>Dein Beitrag</h4>
+                
 
                 {/*<TextAreaFieldGroup
                   placeholder="* Hier kannst Du deinen Beitrag erstellen."
@@ -189,7 +120,7 @@ class addPost extends Component {
 
                 <input
                   type="submit"
-                  value="Veröffentlichen"
+                  value="Nutzer erstellen"
                   className="btn btn-info btn-block mt-4"
                 />
                 {/* <input type="copy" value="Als Entwurf speichern" className="btn btn-secondary btn-block mt-4" /> */}
@@ -202,16 +133,15 @@ class addPost extends Component {
   }
 }
 
-addPost.propTypes = {
-  // post: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+addNutzer.propTypes = {
+  nutzer: PropTypes.object.isRequired,
+  createNutzer: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  post: state.post,
-  errors: state.errors,
-  profile: state.profile
+  nutzer: state.nutzer,
+  errors: state.errors
 });
 
-export default connect(mapStateToProps, { createPost })(withRouter(addPost));
+export default connect(mapStateToProps, { createNutzer })(withRouter(addNutzer));
