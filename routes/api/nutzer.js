@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
 // @desc    Delete A Nutzer
 // @access  Public
 router.delete('/:code', (req, res) => {
-    Groups.findById(req.params.code)
+    Nutzer.findOne({code: req.params.code})
         .then(nutzer => nutzer.remove().then(() => res.json({ success: true })))
         .catch(err => res.status(404).json({ success: false }));
 })
