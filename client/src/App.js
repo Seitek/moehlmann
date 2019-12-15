@@ -12,7 +12,7 @@ import './App.css';
 
 //Pages
 import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
+//import Landing from './components/layout/Landing';
 import Dashboard from './components/layout/Dashboard';
 import Footer from './components/layout/Footer';
 import NeuNutzer from './components/neuForm/neuerNutzer';

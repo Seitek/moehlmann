@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
-import SelectListGroup from "../common/SelectListGroup";
+//import SelectListGroup from "../common/SelectListGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { createNutzer } from "../../actions/nutzerActions";
@@ -33,10 +33,10 @@ class addNutzer extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
+  
     const nutzerData = {
       vorname: this.state.vorname,
-      nachname: this.state.nachanme,
+      nachname: this.state.nachname,
       code: this.state.code
     };
 
@@ -45,9 +45,9 @@ class addNutzer extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    const { errors } = this.state;
+    //const { errors } = this.state;
 
-   
+  
     
   }
 
@@ -61,7 +61,7 @@ class addNutzer extends Component {
         <div className="container-fluid">
           <div className="row justify-content-md-center">
             <div className="col my-5 fenster">
-              <Link to="/dashboard" className="btn btn-light">
+              <Link to="/" className="btn btn-light">
                 <i className="fas fa-angle-left text-info" /> Zurück zum
                 Dashboard
               </Link>
@@ -74,7 +74,7 @@ class addNutzer extends Component {
                   name="vorname"
                   value={this.state.vorname}
                   onChange={this.onChange}
-                  error=''
+                  error={errors.vorname}
                 />
 
                 <TextFieldGroup
@@ -82,7 +82,7 @@ class addNutzer extends Component {
                   name="nachname"
                   value={this.state.nachname}
                   onChange={this.onChange}
-                  error=''
+                  error={errors.nachanme}
                 />
 
                 
@@ -92,7 +92,7 @@ class addNutzer extends Component {
                   name="code"
                   value={this.state.code}
                   onChange={this.onChange}
-                  error=''
+                  error={errors.code}
                   info="Der Code dient zur Anmeldung in der App."
                 />
 

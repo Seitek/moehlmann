@@ -40,6 +40,15 @@ router.post('/', (req, res) => {
     newNutzer.save().then(nutzer => res.json(nutzer));
 });
 
+// @route   DELETE api/nutzer/:id
+// @desc    Delete A Nutzer
+// @access  Public
+router.delete('/:code', (req, res) => {
+    Groups.findById(req.params.code)
+        .then(nutzer => nutzer.remove().then(() => res.json({ success: true })))
+        .catch(err => res.status(404).json({ success: false }));
+})
+
 
 
 

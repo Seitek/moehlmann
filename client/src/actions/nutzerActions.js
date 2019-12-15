@@ -9,15 +9,12 @@ import {
 
 
 //Create Nutzer
-export const createNutzer = (postData, history) => dispatch => {
+export const createNutzer = (nutzerData, history) => dispatch => {
     axios
-      .post("/api/nutzer", postData)
+      .post("/api/nutzer", nutzerData)
       .then(res => history.push("/"))
       .catch(err =>
-        dispatch({
-          type: GET_ERRORS,
-          payload: { msg: err.response.statusText, status: err.response.status }
-        })
+        dispatch(console.log(err.response.statusText))
       );
   };
 

@@ -25,8 +25,8 @@ class Dashboard extends Component {
   render() {
     //  const { user } = this.props.auth;
     //   const { profile, loading } = this.props.profile;
-    const { nutzers } = this.props.nutzer;
-    const { fahrten } = this.props.fahrten;
+    //const { nutzers } = this.props.nutzer;
+    //const { fahrten } = this.props.fahrten;
 
     let dashboardContent;
     // Ladebildschirm einbinden
