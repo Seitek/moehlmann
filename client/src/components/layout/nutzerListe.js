@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 //import Spinner from '../common/Spinner';
 //import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import {deleteNutzer, getNutzers} from '../../actions/nutzerActions';
 
 
 
@@ -15,8 +16,9 @@ class myPosts extends Component {
         // this.props.getUserPosts();
     }
 
-    onDeleteClick(id) {
-     //   this.props.deletePost(id, this.props.history);
+    onDeleteClick(code) {
+       this.props.deleteNutzer(code, this.props.history);
+       this.props.getNutzers();
     }
 
 
@@ -52,7 +54,7 @@ class myPosts extends Component {
                         <td>{nutzer.code}</td>
                         <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-info">Aufträge bearbeiten</Link></td>
                         <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-secondary">Nutzer bearbeiten</Link></td>
-                        <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-link">Nutzer löschen</Link></td>
+                        <td><button onClick={this.onDeleteClick.bind(this, nutzer.code)} className="btn btn-danger">Nutzer löschen</button></td>
                     </tr>
                     </React.Fragment>
                     
@@ -92,7 +94,9 @@ class myPosts extends Component {
 }
 
 myPosts.propTypes = {
-    nutzer: PropTypes.object.isRequired
+    nutzer: PropTypes.object.isRequired,
+    deleteNutzer: PropTypes.func.isRequired,
+    getNutzers: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -100,4 +104,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(withRouter(myPosts));
+export default connect(mapStateToProps, {deleteNutzer, getNutzers})(withRouter(myPosts));
