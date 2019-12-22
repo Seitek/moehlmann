@@ -69,7 +69,7 @@ class myPosts extends Component {
 
         return (
             <div>
-                <h4 className="mb-4">Auftragsliste</h4>
+                <h4 className="mb-4">Offene Aufträge</h4>
                 <table className="table table-hover">
                     <thead>
                         <tr>

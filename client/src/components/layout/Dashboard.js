@@ -10,9 +10,11 @@ import { connect } from "react-redux";
 //import GroupPosts from './groupPosts';
 import Nutzerliste from "./nutzerListe";
 import Auftragliste from "./auftragListe";
+import Kundenliste from "./kundenListe";
 //import SelectListGroup from '../common/SelectListGroup';
 import { getNutzers } from "../../actions/nutzerActions";
 import { getFahrten } from "../../actions/fahrtenActions";
+import { getKunden } from "../../actions/kundenActions";
 
 import "./css/Dashboard.css";
 
@@ -20,6 +22,7 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getNutzers();
     this.props.getFahrten();
+    this.props.getKunden();
   }
 
   render() {
@@ -36,18 +39,17 @@ class Dashboard extends Component {
     dashboardContent = (
       <div>
         <div className="row">
-          <div className="col-md-12 py-2 my-3 fenster">
-            <Auftragliste />
-          </div>
-        </div>
-
-        <div className="row">
           <div className="col py-2 my-3 mr-2 fenster f-halb">
             <Nutzerliste />
           </div>
 
           <div className="col py-2 my-3 ml-2 fenster f-halb">
-            Die Kundenliste ist bald verfügbar.
+            <Kundenliste />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 py-2 my-3 fenster">
+            <Auftragliste />
           </div>
         </div>
       </div>
@@ -68,7 +70,7 @@ class Dashboard extends Component {
                 <Link to="/neu-nutzer" className="btn btn-secondary ml-1">
                   Neuer Nutzer
                 </Link>
-                <Link to="/manage-group" className="btn btn-secondary ml-1">
+                <Link to="/neu-kunde" className="btn btn-secondary ml-1">
                   Neuer Kunde
                 </Link>
               </div>
@@ -87,6 +89,7 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   getNutzers: PropTypes.func.isRequired,
   getFahrten: PropTypes.func.isRequired,
+  getKunden: PropTypes.func.isRequired,
   nutzer: PropTypes.object.isRequired,
   fahrten: PropTypes.object.isRequired
 };
@@ -96,4 +99,4 @@ const mapStateToProps = state => ({
   fahrten: state.fahrten
 });
 
-export default connect(mapStateToProps, { getNutzers, getFahrten })(Dashboard);
+export default connect(mapStateToProps, { getNutzers, getFahrten, getKunden })(Dashboard);

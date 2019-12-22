@@ -8,3 +8,7 @@ export const GET_NUTZERS = 'GET_NUTZERS';
 export const FAHRT_LOADING = 'FAHRT_LOADING';
 export const GET_FAHRT = 'GET_FAHRT';
 export const GET_FAHRTEN = 'GET_FAHRTEN';
+//Kunden
+export const KUNDEN_LOADING = 'KUNDEN_LOADING';
+export const GET_KUNDE = 'GET_KUNDE';
+export const GET_KUNDEN = 'GET_KUNDEN';

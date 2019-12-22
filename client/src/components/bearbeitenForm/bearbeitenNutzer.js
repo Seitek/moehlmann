@@ -3,27 +3,35 @@ import { Link, withRouter } from "react-router-dom";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { createNutzer } from "../../actions/nutzerActions";
+import { updateNutzer, getNutzer } from "../../actions/nutzerActions";
 
 let test;
-class addNutzer extends Component {
+class bearbeitenNutzer extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      vorname: '',
-      nachname: '',
-      code: '',
-      errors: {}
+        
+     this.state = {
+        vorname: '',
+        nachname: '',
+        code: '',
+        errors: {}
     };
+      
+  
+    
+    
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.props.getNutzer(this.props.match.params.id);
+}
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.errors) {
-      this.setState({ errors: nextProps.errors });
+      this.setState({errors: nextProps.errors});
     }
   }
 
@@ -36,7 +44,7 @@ class addNutzer extends Component {
       code: this.state.code
     };
 
-    this.props.createNutzer(nutzerData, this.props.history);
+    this.props.updateNutzer(nutzerData, this.props.history);
   }
 
   onChange(e) {
@@ -45,6 +53,14 @@ class addNutzer extends Component {
 
   render() {
     const { errors } = this.state;
+    const { nutzer } = this.props.nutzer;
+
+    this.state = {
+        vorname: nutzer.vorname,
+        nachname: nutzer.nachanme,
+        code: nutzer.code,
+        errors: {}
+    };
 
     //select options for categorys
 
@@ -103,9 +119,10 @@ class addNutzer extends Component {
   }
 }
 
-addNutzer.propTypes = {
+bearbeitenNutzer.propTypes = {
   nutzer: PropTypes.object.isRequired,
-  createNutzer: PropTypes.func.isRequired,
+  updateNutzer: PropTypes.func.isRequired,
+  getNutzer: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -114,4 +131,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { createNutzer })(withRouter(addNutzer));
+export default connect(mapStateToProps, { updateNutzer, getNutzer })(withRouter(bearbeitenNutzer));

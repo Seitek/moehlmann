@@ -1,51 +1,39 @@
 import axios from "axios";
 import {
   GET_ERRORS,
-  NUTZER_LOADING,
-  GET_NUTZER,
-  GET_NUTZERS,
+  KUNDEN_LOADING,
+  GET_KUNDE,
+  GET_KUNDEN,
   CLEAR_ERRORS
 } from "./types";
 
 
 //Create Nutzer
-export const createNutzer = (nutzerData, history) => dispatch => {
+export const createKunden = (kundenData, history) => dispatch => {
     axios
-      .post("/api/nutzer", nutzerData)
+      .post("/api/kunden", kundenData)
       .then(res => history.push("/"))
       .catch(err =>
         dispatch(console.log(err.response.statusText))
       );
   };
 
-//Update Nutzer
-export const updateNutzer = (nutzerData, history) => dispatch => {
-  axios
-    .post("/api/nutzer/:id", nutzerData)
-    .then(res => history.push("/"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: { msg: err.response.statusText, status: err.response.status }
-      })
-    );
-};
 
 
 // Get Nutzers
-export const getNutzers = () => dispatch => {
-  dispatch(setNutzerLoading());
+export const getKunden = () => dispatch => {
+  dispatch(setKundeLoading());
   axios
-    .get("/api/nutzer")
+    .get("/api/kunden")
     .then(res =>
       dispatch({
-        type: GET_NUTZERS,
+        type: GET_KUNDEN,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_NUTZERS,
+        type: GET_KUNDEN,
         payload: { msg: err.response.statusText, status: err.response.status }
       })
     );
@@ -54,19 +42,19 @@ export const getNutzers = () => dispatch => {
 
 
 // Get Nutzer
-export const getNutzer = id => dispatch => {
-  dispatch(setNutzerLoading());
+export const getKunde = id => dispatch => {
+  dispatch(setKundeLoading());
   axios
-    .get(`/api/nutzer/${id}`)
+    .get(`/api/kunden/${id}`)
     .then(res =>
       dispatch({
-        type: GET_NUTZER,
+        type: GET_KUNDE,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_NUTZER,
+        type: GET_KUNDE,
         payload: { msg: err.response.statusText, status: err.response.status }
       })
     );
@@ -75,9 +63,9 @@ export const getNutzer = id => dispatch => {
 
 
 // Nutzer Loading
-export const setNutzerLoading = () => {
+export const setKundeLoading = () => {
   return {
-    type: NUTZER_LOADING
+    type: KUNDEN_LOADING
   };
 };
 
@@ -89,14 +77,14 @@ export const clearErrors = () => {
 };
 
 //Delete Post
-export const deleteNutzer = (id, history) => dispatch => {
+export const deleteKunden = (id, history) => dispatch => {
   if (
     window.confirm(
-      "Bist Du sicher? Der Nutzer kann nicht wiederhergestellt werden."
+      "Bist Du sicher? Der Kunde kann nicht wiederhergestellt werden."
     )
   ) {
     axios
-      .delete(`/api/nutzer/${id}`)
+      .delete(`/api/kunden/${id}`)
       .then(res => history.push("/"))
       .catch(err =>
         dispatch({

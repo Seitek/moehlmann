@@ -27,6 +27,18 @@ router.get('/:code', (req, res) => {
         }));
 });
 
+// @route   GET api/nutzer
+// @desc    Get All Nutzer
+// @access  Public
+router.get('/:id', (req, res) => {
+    Nutzer.find({_id: req.params.id})
+        .sort({ date: -1 })
+        .then(nutzer => res.json(nutzer))
+        .catch(err => res.status(404).json({
+            message: 'Keinen Nutzer mit diesem Code gefunden.'
+        }));
+});
+
 // @route   POST api/nutzer
 // @desc    Create A Nutzer
 // @access  Public
@@ -38,6 +50,24 @@ router.post('/', (req, res) => {
     });
 
     newNutzer.save().then(nutzer => res.json(nutzer));
+});
+
+
+// @route   POST api/fahrten
+// @desc    Update A Nutzer
+// @access  Public
+router.post('/:id', (req, res) => {
+    const data = {
+        vorname: req.body.vorname,
+        nachname: req.body.nachname,
+        code: req.body.code,
+    }
+   Nutzer.findOneAndUpdate({_id: req.params.id}, {$set: data}, {new: true})
+   .then( nutzer => res.status(200).json({message: 'OK'}))
+   .catch(error => {
+    res.status(400).json({message: 'Nutzer nicht gefunden.'})
+   });
+    
 });
 
 // @route   DELETE api/nutzer/:id

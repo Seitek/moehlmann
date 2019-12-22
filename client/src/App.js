@@ -16,6 +16,8 @@ import Navbar from './components/layout/Navbar';
 import Dashboard from './components/layout/Dashboard';
 import Footer from './components/layout/Footer';
 import NeuNutzer from './components/neuForm/neuerNutzer';
+import NeuKunde from './components/neuForm/neuerKunde';
+import bearbeitenNutzer from './components/bearbeitenForm/bearbeitenNutzer';
 
 class App extends Component {
   render(){
@@ -29,6 +31,9 @@ class App extends Component {
 
         <div className="container-fluid backend">
          <Route exact path="/neu-nutzer" component={NeuNutzer} />
+         <Route exact path="/neu-kunde" component={NeuKunde} />
+         <Route exact path="/postedit/:id" component={bearbeitenNutzer} />
+
           
         
         </div>
