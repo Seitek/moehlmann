@@ -14,6 +14,7 @@ var cors = require('cors')
 //const school = require('./routes/api/school');
 const nutzer = require('./routes/api/nutzer');
 const fahrten = require('./routes/api/fahrten');
+const kunden = require('./routes/api/kunden');
 
 const app = express();
 
@@ -42,6 +43,7 @@ mongoose
 
 app.use('/api/fahrten', fahrten);
 app.use('/api/nutzer', nutzer);
+app.use('/api/kunden', kunden);
 
 
 // Server static assets if in production
