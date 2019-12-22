@@ -57,7 +57,7 @@ export const getNutzers = () => dispatch => {
 export const getNutzer = id => dispatch => {
   dispatch(setNutzerLoading());
   axios
-    .get(`/api/nutzer/${id}`)
+    .get(`/api/nutzer/id/${id}`)
     .then(res =>
       dispatch({
         type: GET_NUTZER,

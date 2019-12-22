@@ -30,7 +30,7 @@ router.get('/:code', (req, res) => {
 // @route   GET api/nutzer
 // @desc    Get All Nutzer
 // @access  Public
-router.get('/:id', (req, res) => {
+router.get('/id/:id', (req, res) => {
     Nutzer.find({_id: req.params.id})
         .sort({ date: -1 })
         .then(nutzer => res.json(nutzer))
