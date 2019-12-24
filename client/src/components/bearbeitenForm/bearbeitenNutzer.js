@@ -4,12 +4,16 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { updateNutzer, getNutzer } from "../../actions/nutzerActions";
+//import Spinner from '../common/Spinner';
+
 
 let test;
 class bearbeitenNutzer extends Component {
   constructor(props) {
     super(props);
         
+
+    
      this.state = {
         vorname: '',
         nachname: '',
@@ -27,12 +31,39 @@ class bearbeitenNutzer extends Component {
 
   componentDidMount() {
     this.props.getNutzer(this.props.match.params.id);
+
+   // const { nutzer, loading } = this.props.nutzer;
+   // let spinner;
+
+
+   /* if (nutzer === null || loading) {
+        spinner = <Spinner />
+     } else {
+    this.setState = ({
+        vorname: nutzer.vorname,
+        nachname: nutzer.nachname,
+        code: nutzer.code,
+        errors: {}
+    });
+};*/
 }
   componentWillReceiveProps(nextProps) {
 
     if (nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
+
+    const {nutzer, loading} = this.props.nutzer;
+
+    if(!loading){
+      this.setState({
+        vorname: nutzer.vorname,
+        nachname: nutzer.nachanme,
+        code: nutzer.code
+      })
+    }
+
+    
   }
 
   onSubmit(e) {
@@ -53,14 +84,7 @@ class bearbeitenNutzer extends Component {
 
   render() {
     const { errors } = this.state;
-    const { nutzer } = this.props.nutzer;
-
-    this.state = {
-        vorname: nutzer.vorname,
-        nachname: nutzer.nachanme,
-        code: nutzer.code,
-        errors: {}
-    };
+    
 
     //select options for categorys
 
@@ -73,8 +97,8 @@ class bearbeitenNutzer extends Component {
                 <i className="fas fa-angle-left text-info" /> Zurück zum
                 Dashboard
               </Link>
-              <h1 className="display-4 text-center">Nutzer erstellen</h1>
-              <p className="lead text-center">Erstelle einen neuen Nutzer.</p>
+              <h1 className="display-4 text-center">Nutzer bearbeiten</h1>
+              <p className="lead text-center">Bearbeite einen Nutzer.</p>
               <small className="d-block pb-3">* = Pflichtfelder</small>
               <form onSubmit={this.onSubmit}>
               <TextFieldGroup
