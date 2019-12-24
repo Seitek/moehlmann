@@ -31,7 +31,7 @@ router.get('/:code', (req, res) => {
 // @desc    Get All Nutzer
 // @access  Public
 router.get('/id/:id', (req, res) => {
-    Nutzer.find({_id: req.params.id})
+    Nutzer.findById(req.params.id)
         .sort({ date: -1 })
         .then(nutzer => res.json(nutzer))
         .catch(err => res.status(404).json({
