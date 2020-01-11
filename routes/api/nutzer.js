@@ -31,8 +31,7 @@ router.get('/:code', (req, res) => {
 // @desc    Get All Nutzer
 // @access  Public
 router.get('/id/:id', (req, res) => {
-    Nutzer.findById(req.params.id)
-        .sort({ date: -1 })
+    Nutzer.findOne({_id: req.params.id})
         .then(nutzer => res.json(nutzer))
         .catch(err => res.status(404).json({
             message: 'Keinen Nutzer mit diesem Code gefunden.'

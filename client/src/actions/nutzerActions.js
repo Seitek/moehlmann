@@ -19,9 +19,9 @@ export const createNutzer = (nutzerData, history) => dispatch => {
   };
 
 //Update Nutzer
-export const updateNutzer = (nutzerData, history) => dispatch => {
+export const updateNutzer = (id, nutzerData, history) => dispatch => {
   axios
-    .post("/api/nutzer/:id", nutzerData)
+    .post(`/api/nutzer/${id}`, nutzerData)
     .then(res => history.push("/"))
     .catch(err =>
       dispatch({

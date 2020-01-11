@@ -6,8 +6,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-    nutzer: {},
-    nutzers: [],
+    nutz: null,
+    nutzers: null,
     loading: false,
 }
 
@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
         case GET_NUTZER:
             return {
                 ...state,
-                nutzer: action.payload,
+                nutz: action.payload,
                 loading: false
             };
 

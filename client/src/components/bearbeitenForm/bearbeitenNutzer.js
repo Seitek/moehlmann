@@ -8,58 +8,44 @@ import { updateNutzer, getNutzer } from "../../actions/nutzerActions";
 
 
 let test;
+
+
+
 class bearbeitenNutzer extends Component {
   constructor(props) {
     super(props);
-        
-
-    
+  
      this.state = {
         vorname: '',
         nachname: '',
         code: '',
         errors: {}
     };
-      
-  
-    
-    
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  
+
   componentDidMount() {
     this.props.getNutzer(this.props.match.params.id);
 
-   // const { nutzer, loading } = this.props.nutzer;
-   // let spinner;
-
-
-   /* if (nutzer === null || loading) {
-        spinner = <Spinner />
-     } else {
-    this.setState = ({
-        vorname: nutzer.vorname,
-        nachname: nutzer.nachname,
-        code: nutzer.code,
-        errors: {}
-    });
-};*/
 }
+
   componentWillReceiveProps(nextProps) {
 
     if (nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
 
-    const {nutzer, loading} = this.props.nutzer;
+    const {nutz, loading} = this.props.nutzer;
 
     if(!loading){
       this.setState({
-        vorname: nutzer.vorname,
-        nachname: nutzer.nachanme,
-        code: nutzer.code
+        vorname: loading || !nutz.vorname ? '': nutz.vorname,
+        nachname: loading || !nutz.nachname ? '': nutz.nachname,
+        code: loading || !nutz.code ? '': nutz.code
       })
     }
 

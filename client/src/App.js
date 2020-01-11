@@ -17,7 +17,7 @@ import Dashboard from './components/layout/Dashboard';
 import Footer from './components/layout/Footer';
 import NeuNutzer from './components/neuForm/neuerNutzer';
 import NeuKunde from './components/neuForm/neuerKunde';
-import bearbeitenNutzer from './components/bearbeitenForm/bearbeitenNutzer';
+import bearbeitenNutzer from './components/bearbeitenForm/bearbeitenNutzer_neu';
 
 class App extends Component {
   render(){
