@@ -8,7 +8,7 @@ import {
 } from "./types";
 
 
-//Create Nutzer
+//Create Fahrt
 export const createFahrt = (postData, history) => dispatch => {
     axios
       .post("/api/fahrten", postData)
@@ -20,6 +20,41 @@ export const createFahrt = (postData, history) => dispatch => {
         })
       );
   };
+
+
+  //Fahrt abschließen
+export const completeFahrt = (auftragnr, history) => dispatch => {
+  if (
+    window.confirm(
+      "Bist Du sicher?"
+    )
+  ){
+    axios
+    .post(`/api/fahrten/${auftragnr}`)
+    .then(res => history.push("/"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      })
+    )}};
+
+     //Fahrt abbrechen
+export const abortFahrt = (auftragnr, history) => dispatch => {
+  if (
+    window.confirm(
+      "Bist Du sicher?"
+    )
+  ){
+    axios
+    .post(`/api/fahrten/abbruch/${auftragnr}`)
+    .then(res => history.push("/"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      })
+    )}};
 
 
 

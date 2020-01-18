@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 
 // DB Config
-const db = 'mongodb://18.196.103.250:27017/moehlmann';
+const db = 'mongodb://35.159.26.234:27017/moehlmann';
 
 // Connect Mongo
 mongoose
@@ -44,17 +44,6 @@ mongoose
 app.use('/api/fahrten', fahrten);
 app.use('/api/nutzer', nutzer);
 app.use('/api/kunden', kunden);
-
-
-// Server static assets if in production
-/*if (process.env.NODE_ENV === 'production') {
-    //Set static folder
-    app.use(express.static('client/build'));
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    })
-}*/
 
 
 const port = process.env.PORT || 5002;

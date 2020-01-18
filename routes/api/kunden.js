@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 // @desc    Get All Kunden
 // @access  Public
 router.get('/:id', (req, res) => {
-    Kunden.find({_id: req.params.id})
+    Kunden.findOne({_id: req.params.id})
         .sort({ date: -1 })
         .then(kunden => res.json(kunden))
         .catch(err => res.status(404).json({
@@ -41,6 +41,26 @@ router.post('/', (req, res) => {
     });
 
     newKunden.save().then(kunden => res.json(kunden));
+});
+
+// @route   POST api/kunden/:id
+// @desc    Update A Kunden
+// @access  Public
+router.post('/:id', (req, res) => {
+    const data = {
+        vorname: req.body.vorname,
+        nachname: req.body.nachname,
+        strasse: req.body.strasse,
+        hausnummer: req.body.hausnummer,
+        plz: req.body.plz,
+        ort: req.body.ort
+    }
+   Kunden.findOneAndUpdate({_id: req.params.id}, {$set: data}, {new: true})
+   .then( kunden => res.status(200).json({message: 'OK'}))
+   .catch(error => {
+    res.status(400).json({message: 'Nutzer nicht gefunden.'})
+   });
+    
 });
 
 // @route   DELETE api/kunden/:id

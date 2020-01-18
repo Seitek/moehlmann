@@ -6,8 +6,8 @@ import {
 } from '../actions/types';
 
 const initialState = {
-    kunde: {},
-    kunden: [],
+    kunde: null,
+    kunden: null,
     loading: false,
 }
 

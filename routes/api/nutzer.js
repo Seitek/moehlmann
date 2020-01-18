@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 });
 
 
-// @route   POST api/fahrten
+// @route   POST api/nutzer/:id
 // @desc    Update A Nutzer
 // @access  Public
 router.post('/:id', (req, res) => {

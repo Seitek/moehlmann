@@ -55,7 +55,7 @@ class myPosts extends Component {
             }
             else {
                 postContent = fahrten.map(fahrt => {
-                if (!fahrt.ist_abgeschlossen && !fahrt.ist_geloescht){
+                if (!fahrt.ist_abgeschlossen && !fahrt.ist_geloescht && fahrt.nutzercode === this.props.match.params.code){
                     
                     return(<React.Fragment>
                     <tr key={fahrt._id} >
@@ -82,6 +82,10 @@ class myPosts extends Component {
 
         return (
             <div>
+                <div className="row">
+                <div className="col-md-12">
+                <div className="row">
+                <div className="col py-2 my-3 mr-2 fenster f-halb">
                 <h4 className="mb-4">Offene Aufträge</h4>
                 <table className="table table-hover">
                     <thead>
@@ -104,7 +108,11 @@ class myPosts extends Component {
                         </tbody>
 
                 </table>
-              
+                </div>
+                
+                </div>
+                </div>
+                </div>
             </div>
         )
     }

@@ -8,7 +8,8 @@ import {
 } from "./types";
 
 
-//Create Nutzer
+
+//Create Kunde
 export const createKunden = (kundenData, history) => dispatch => {
     axios
       .post("/api/kunden", kundenData)
@@ -19,8 +20,21 @@ export const createKunden = (kundenData, history) => dispatch => {
   };
 
 
+  //Update Kunde
+export const updateKunde = (id, kundeData, history) => dispatch => {
+  axios
+    .post(`/api/kunden/${id}`, kundeData)
+    .then(res => history.push("/"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      })
+    );
+};
 
-// Get Nutzers
+
+// Get Kunden
 export const getKunden = () => dispatch => {
   dispatch(setKundeLoading());
   axios
@@ -41,7 +55,7 @@ export const getKunden = () => dispatch => {
 
 
 
-// Get Nutzer
+// Get Kunde
 export const getKunde = id => dispatch => {
   dispatch(setKundeLoading());
   axios
@@ -62,7 +76,7 @@ export const getKunde = id => dispatch => {
 
 
 
-// Nutzer Loading
+// Kunde Loading
 export const setKundeLoading = () => {
   return {
     type: KUNDEN_LOADING
@@ -76,7 +90,7 @@ export const clearErrors = () => {
   };
 };
 
-//Delete Post
+//Delete Kunden
 export const deleteKunden = (id, history) => dispatch => {
   if (
     window.confirm(

@@ -17,7 +17,9 @@ import Dashboard from './components/layout/Dashboard';
 import Footer from './components/layout/Footer';
 import NeuNutzer from './components/neuForm/neuerNutzer';
 import NeuKunde from './components/neuForm/neuerKunde';
-import bearbeitenNutzer from './components/bearbeitenForm/bearbeitenNutzer_neu';
+import bearbeitenNutzer from './components/bearbeitenForm/bearbeitenNutzer';
+import bearbeitenKunden from './components/bearbeitenForm/bearbeitenKunde';
+import nutzerAuftraege from './components/auftraege/zeigeNutzerAuftraege';
 
 class App extends Component {
   render(){
@@ -33,6 +35,8 @@ class App extends Component {
          <Route exact path="/neu-nutzer" component={NeuNutzer} />
          <Route exact path="/neu-kunde" component={NeuKunde} />
          <Route exact path="/postedit/:id" component={bearbeitenNutzer} />
+         <Route exact path="/kundenedit/:id" component={bearbeitenKunden} />
+         <Route exact path="/nutzerauftraege/:code" component={nutzerAuftraege} />
 
           
         

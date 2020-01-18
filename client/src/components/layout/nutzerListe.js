@@ -52,7 +52,7 @@ class myPosts extends Component {
                         <td>{nutzer.vorname}</td>
                         <td>{nutzer.nachname}</td>
                         <td>{nutzer.code}</td>
-                        <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-info">Aufträge bearbeiten</Link></td>
+                        <td><Link to={`/nutzerauftraege/${nutzer.code}`} className="btn btn-info">Aufträge bearbeiten</Link></td>
                         <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-secondary">Nutzer bearbeiten</Link></td>
                         <td><button onClick={this.onDeleteClick.bind(this, nutzer.code)} className="btn btn-danger">Nutzer löschen</button></td>
                     </tr>
