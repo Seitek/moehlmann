@@ -1,17 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//const passport = require('passport');
 const path = require('path');
 var cors = require('cors')
 
 // Add Routes
-//const users = require('./routes/api/users');
-//const profile = require('./routes/api/profile');
-//const items = require('./routes/api/items');
-//const posts = require('./routes/api/posts');
-//const documents = require('./routes/api/documents');
-//const school = require('./routes/api/school');
 const nutzer = require('./routes/api/nutzer');
 const fahrten = require('./routes/api/fahrten');
 const kunden = require('./routes/api/kunden');
@@ -24,6 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 
 // DB Config
@@ -44,6 +38,8 @@ mongoose
 app.use('/api/fahrten', fahrten);
 app.use('/api/nutzer', nutzer);
 app.use('/api/kunden', kunden);
+
+
 
 
 const port = process.env.PORT || 5002;
