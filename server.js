@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'client/build')))
+
 
 
 // DB Config
@@ -26,7 +26,8 @@ const db = 'mongodb://127.0.0.1:27017/moehlmann';
 // Connect Mongo
 mongoose
     .connect(db, {
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true
     })
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
@@ -40,7 +41,10 @@ app.use('/api/nutzer', nutzer);
 app.use('/api/kunden', kunden);
 
 
-
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+})
 
 const port = process.env.PORT || 5002;
 const url = process.env.URL || '127.0.0.1';
