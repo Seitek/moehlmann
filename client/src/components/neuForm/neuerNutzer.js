@@ -52,7 +52,7 @@ class addNutzer extends Component {
       <div className="add-post">
         <div className="container-fluid">
           <div className="row justify-content-md-center">
-            <div className="col my-5 fenster">
+            <div className="col-6 my-5 fenster">
               <Link to="/" className="btn btn-light">
                 <i className="fas fa-angle-left text-info" /> Zurück zum
                 Dashboard

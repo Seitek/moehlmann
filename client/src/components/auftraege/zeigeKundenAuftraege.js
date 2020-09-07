@@ -53,7 +53,7 @@ class myPosts extends Component {
             }
             else {
                 postContent = fahrten
-                .filter(fahrt => !fahrt.ist_abgeschlossen && !fahrt.ist_geloescht && fahrt.nutzercode === this.props.match.params.code)
+                .filter(fahrt => !fahrt.ist_abgeschlossen && !fahrt.ist_geloescht && fahrt.kundeVorname === this.props.match.params.vorname && fahrt.kundeNachname === this.props.match.params.nachname)
                 .map(fahrt => {return(
                     <React.Fragment>
                      <tr key={fahrt._id} >

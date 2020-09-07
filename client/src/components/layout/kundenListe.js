@@ -7,11 +7,27 @@ import { withRouter } from 'react-router-dom';
 //import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import {deleteKunden, getKunden} from '../../actions/kundenActions';
+import Pagination from './Pagination'
 
 
 
 
 class myPosts extends Component {
+    constructor(props) {
+        super(props);
+
+        //Pagination
+        this.state = {
+         loading: true,
+         currentPage: 1,
+         postsPerPage: 5,
+         totalPosts: 0,
+        }
+
+       //Pagination
+       this.setTotalPosts = this.setTotalPosts.bind(this);
+    }
+
     componentDidMount() {
         // this.props.getUserPosts();
     }
@@ -21,6 +37,9 @@ class myPosts extends Component {
        this.props.getKunden();
     }
 
+    setTotalPosts(length){
+        this.setState({totalPosts: length, loading: false});
+    }
 
     render() {
 
@@ -36,6 +55,11 @@ class myPosts extends Component {
            // spinner = <Spinner />
         } else {
 
+              // Pagination
+         if (this.state.totalPosts === 0 && this.state.loading === true){this.setTotalPosts(kunden.length)};
+         const indexOFLastPost = this.state.currentPage * this.state.postsPerPage;
+         const indexOfFirstPost = indexOFLastPost - this.state.postsPerPage;
+
             // Test, ob bereits ein Beitrag vorhanden ist.
             let Nutzername = "";
             kunden.map(kunden => (
@@ -46,13 +70,15 @@ class myPosts extends Component {
                 errortext = "Es wurde noch kein Kunde hinzugefügt.";
             }
             else {
-                postContent = kunden.map(kunden => (
+                postContent = kunden
+                .slice(indexOfFirstPost, indexOFLastPost)
+                .map(kunden => (
                     <React.Fragment>
                     <tr key={kunden._id} >
                         <td>{kunden.vorname}</td>
                         <td>{kunden.nachname}</td>
                         <td>{kunden.strasse} {kunden.hausnummer}<br/>{kunden.plz} {kunden.ort}</td>
-                        <td><Link to={`/kundenauftrag/${kunden._id}`} className="btn btn-info">Aufträge anzeigen</Link></td>
+                        <td><Link to={`/kundenauftraege/${kunden.vorname}/${kunden.nachname}`} className="btn btn-info">Aufträge anzeigen</Link></td>
                         <td><Link to={`/kundenedit/${kunden._id}`} className="btn btn-secondary">Kunde bearbeiten</Link></td>
                         <td><button onClick={this.onDeleteClick.bind(this, kunden._id)} className="btn btn-danger">Kunde löschen</button></td>
                     </tr>
@@ -65,6 +91,7 @@ class myPosts extends Component {
 
         }
 
+        const paginate = (pageNumber) => this.setState({currentPage: pageNumber});
 
         return (
             <div>
@@ -84,6 +111,7 @@ class myPosts extends Component {
                         {errortext}
                         <tbody>
                         {postContent}
+                        <Pagination postsPerPage={this.state.postsPerPage} totalPosts={this.state.totalPosts} paginate={paginate}/>
                         </tbody>
 
                 </table>

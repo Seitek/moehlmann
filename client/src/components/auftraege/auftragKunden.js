@@ -6,12 +6,13 @@ import { withRouter } from 'react-router-dom';
 //import Spinner from '../common/Spinner';
 //import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import {deleteNutzer, getNutzers} from '../../actions/nutzerActions';
-import Pagination from './Pagination'
+import {deleteKunden, getKunden} from '../../actions/kundenActions';
+import Pagination from '../layout/Pagination'
 
 
 
-class myPosts extends Component {
+
+class auftragKunden extends Component {
     constructor(props) {
         super(props);
 
@@ -31,62 +32,55 @@ class myPosts extends Component {
         // this.props.getUserPosts();
     }
 
-    onDeleteClick(code) {
-       this.props.deleteNutzer(code, this.props.history);
-       this.props.getNutzers();
+    onDeleteClick(id) {
+       this.props.deleteKunden(id, this.props.history);
+       this.props.getKunden();
     }
 
     setTotalPosts(length){
         this.setState({totalPosts: length, loading: false});
     }
 
-    
-
     render() {
 
      
-        const {nutzers, loading} = this.props.nutzer;
-
-
-      
+        const {kunden, loading} = this.props.kunden;
 
         let postContent;
         //let spinner;
         let errortext;
 
-        
 
-
-        if (nutzers === null || loading) {
+        if (kunden === null || loading) {
            // spinner = <Spinner />
         } else {
 
-             // Pagination
-         if (this.state.totalPosts === 0 && this.state.loading === true){this.setTotalPosts(nutzers.length)};
+              // Pagination
+         if (this.state.totalPosts === 0 && this.state.loading === true){this.setTotalPosts(kunden.length)};
          const indexOFLastPost = this.state.currentPage * this.state.postsPerPage;
          const indexOfFirstPost = indexOFLastPost - this.state.postsPerPage;
 
             // Test, ob bereits ein Beitrag vorhanden ist.
             let Nutzername = "";
-            nutzers.map(nutzer => (
-                Nutzername = nutzer.vorname
+            kunden.map(kunden => (
+                Nutzername = kunden.vorname
             ));
 
             if (Nutzername === "") {
-                errortext = "Es wurde noch kein Nutzer hinzugefügt.";
+                errortext = "Es wurde noch kein Kunde hinzugefügt.";
             }
             else {
-                postContent = nutzers
+                postContent = kunden
                 .slice(indexOfFirstPost, indexOFLastPost)
-                .map(nutzer => (
+                .map(kunden => (
                     <React.Fragment>
-                    <tr key={nutzer._id} >
-                        <td>{nutzer.vorname}</td>
-                        <td>{nutzer.nachname}</td>
-                        <td>{nutzer.code}</td>
-                        <td><Link to={`/nutzerauftraege/${nutzer.code}`} className="btn btn-info">Aufträge bearbeiten</Link></td>
-                        <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-secondary">Nutzer bearbeiten</Link></td>
-                        <td><button onClick={this.onDeleteClick.bind(this, nutzer.code)} className="btn btn-danger">Nutzer löschen</button></td>
+                    <tr key={kunden._id} >
+                        <td>{kunden.vorname}</td>
+                        <td>{kunden.nachname}</td>
+                        <td>{kunden.strasse} {kunden.hausnummer}<br/>{kunden.plz} {kunden.ort}</td>
+                        {/* <td><Link to={`/kundenauftraege/${kunden.vorname}/${kunden.nachname}`} className="btn btn-info">Aufträge anzeigen</Link></td>
+                        <td><Link to={`/kundenedit/${kunden._id}`} className="btn btn-secondary">Kunde bearbeiten</Link></td> */}
+                        <td><button onClick={this.onDeleteClick.bind(this, kunden._id)} className="btn btn-info">Kunde auswählen</button></td>
                     </tr>
                     </React.Fragment>
                     
@@ -101,15 +95,15 @@ class myPosts extends Component {
 
         return (
             <div>
-                <h4 className="mb-4">Nutzerliste</h4>
+                {/* <h4 className="mb-4">Kundenliste</h4> */}
                 <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>Vorname</th>
                             <th>Nachname</th>
-                            <th>Code</th>
-                            <th></th>
-                            <th></th>
+                            <th>Adresse</th>
+                            {/* <th></th>
+                            <th></th> */}
                             <th></th>
                         </tr>
                         </thead>
@@ -127,15 +121,15 @@ class myPosts extends Component {
     }
 }
 
-myPosts.propTypes = {
-    nutzer: PropTypes.object.isRequired,
-    deleteNutzer: PropTypes.func.isRequired,
-    getNutzers: PropTypes.func.isRequired
+auftragKunden.propTypes = {
+    kunden: PropTypes.object.isRequired,
+    deleteKunden: PropTypes.func.isRequired,
+    getKunden: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    nutzer: state.nutzer
+    kunden: state.kunden
 });
 
 
-export default connect(mapStateToProps, {deleteNutzer, getNutzers})(withRouter(myPosts));
+export default connect(mapStateToProps, {deleteKunden, getKunden})(withRouter(auftragKunden));

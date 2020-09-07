@@ -17,9 +17,12 @@ import Dashboard from './components/layout/Dashboard';
 import Footer from './components/layout/Footer';
 import NeuNutzer from './components/neuForm/neuerNutzer';
 import NeuKunde from './components/neuForm/neuerKunde';
+import NeuAuftrag from './components/auftraege/neuerAuftrag';
 import bearbeitenNutzer from './components/bearbeitenForm/bearbeitenNutzer';
 import bearbeitenKunden from './components/bearbeitenForm/bearbeitenKunde';
 import nutzerAuftraege from './components/auftraege/zeigeNutzerAuftraege';
+import kundenAuftraege from './components/auftraege/zeigeKundenAuftraege';
+
 
 class App extends Component {
   render(){
@@ -34,10 +37,11 @@ class App extends Component {
         <div className="container-fluid backend">
          <Route exact path="/neu-nutzer" component={NeuNutzer} />
          <Route exact path="/neu-kunde" component={NeuKunde} />
+         <Route exact path="/neu-auftrag" component={NeuAuftrag} />
          <Route exact path="/postedit/:id" component={bearbeitenNutzer} />
          <Route exact path="/kundenedit/:id" component={bearbeitenKunden} />
          <Route exact path="/nutzerauftraege/:code" component={nutzerAuftraege} />
-
+         <Route exact path="/kundenauftraege/:vorname/:nachname" component={kundenAuftraege} />
           
         
         </div>

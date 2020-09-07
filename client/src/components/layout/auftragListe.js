@@ -6,11 +6,27 @@ import { completeFahrt, abortFahrt, getFahrten } from '../../actions/fahrtenActi
 //import Spinner from '../common/Spinner';
 //import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
+import Pagination from './Pagination'
 
 
 
 
 class myPosts extends Component {
+    constructor(props) {
+        super(props);
+
+        //Pagination
+        this.state = {
+         loading: true,
+         currentPage: 1,
+         postsPerPage: 10,
+         totalPosts: 0,
+        }
+
+       //Pagination
+       this.setTotalPosts = this.setTotalPosts.bind(this);
+    }
+
     componentDidMount() {
         // this.props.getUserPosts();
     }
@@ -25,11 +41,15 @@ class myPosts extends Component {
         this.props.getFahrten();
     }
 
+    setTotalPosts(length){
+        this.setState({totalPosts: length, loading: false});
+    }
 
     render() {
 
      
         const {fahrten, loading} = this.props.fahrten;
+        const {nutzers} = this.props.nutzer;
 
         let postContent;
         //let spinner;
@@ -40,26 +60,34 @@ class myPosts extends Component {
            // spinner = <Spinner />
         } else {
 
+            
+            
+
+            // Pagination
+         if (this.state.totalPosts === 0 && this.state.loading === true){this.setTotalPosts(fahrten.length)};
+         const indexOFLastPost = this.state.currentPage * this.state.postsPerPage;
+         const indexOfFirstPost = indexOFLastPost - this.state.postsPerPage;
+
             // Test, ob bereits ein Beitrag vorhanden ist.
             let Auftragnr = "";
-            fahrten.map(fahrt => {
-                if(!fahrt.ist_abgeschlossen && !fahrt.ist_geloescht){
-                    return(Auftragnr = fahrt.auftragnr);
-                    
-                }
-                
-        });
+            fahrten
+            .filter(fahrt => !fahrt.ist_abgeschlossen && !fahrt.ist_geloescht)
+            .map(fahrt => {return(Auftragnr = fahrt.auftragnr)});
 
             if (Auftragnr === "") {
                 errortext = "Keine offenen Aufträge.";
             }
             else {
-                postContent = fahrten.map(fahrt => {
-                if (!fahrt.ist_abgeschlossen && !fahrt.ist_geloescht){
-                    
+                postContent = fahrten
+                .filter(fahrt => !fahrt.ist_abgeschlossen && !fahrt.ist_geloescht)
+                .slice(indexOfFirstPost, indexOFLastPost)
+                .map(fahrt => {
+                   const nutzerName = nutzers.filter(nutz => nutz.code === fahrt.nutzercode)
+            
                     return(<React.Fragment>
                     <tr key={fahrt._id} >
                         <td>{fahrt.auftragnr}</td>
+                    <td>{nutzerName[0].vorname} {nutzerName[0].nachname}</td>
                         <td>{fahrt.kundeVorname} {fahrt.kundeNachname}</td>
                         <td>{fahrt.vonStrasse} {fahrt.vonHausnummer} <br/> {fahrt.vonPlz} {fahrt.vonOrt}</td>
                         <td>{fahrt.nachStrasse} {fahrt.nachHausnummer}<br/> {fahrt.nachPlz} {fahrt.nachOrt}</td>
@@ -69,16 +97,13 @@ class myPosts extends Component {
                         <td><button onClick={this.onAbortClick.bind(this, fahrt.auftragnr)} className="btn btn-link">Auftrag abbrechen</button></td>
                     </tr>
                     </React.Fragment>)
-                }
-                    
-                    
-                   
-            });
+                    });
             }
 
 
         }
 
+        const paginate = (pageNumber) => this.setState({currentPage: pageNumber});
 
         return (
             <div>
@@ -87,6 +112,7 @@ class myPosts extends Component {
                     <thead>
                         <tr>
                             <th>Auftrags-Nr.</th>
+                            <th>Nutzer</th>
                             <th>Kunde</th>
                             <th>Von</th>
                             <th>Nach</th>
@@ -101,6 +127,7 @@ class myPosts extends Component {
                         <tbody>
                         
                         {postContent}
+                        <Pagination postsPerPage={this.state.postsPerPage} totalPosts={this.state.totalPosts} paginate={paginate}/>
                         </tbody>
 
                 </table>
@@ -112,13 +139,15 @@ class myPosts extends Component {
 
 myPosts.propTypes = {
     fahrten: PropTypes.object.isRequired,
+    nutzer: PropTypes.object.isRequired,
     completeFahrt: PropTypes.func.isRequired,
     abortFahrt: PropTypes.func.isRequired,
     getFahrten: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    fahrten: state.fahrten
+    fahrten: state.fahrten,
+    nutzer: state.nutzer
 });
 
 

@@ -19,6 +19,8 @@ import { getKunden } from "../../actions/kundenActions";
 import "./css/Dashboard.css";
 
 class Dashboard extends Component {
+
+
   componentDidMount() {
     this.props.getNutzers();
     this.props.getFahrten();
@@ -64,7 +66,7 @@ class Dashboard extends Component {
             </div>
             <div className="col-md-6">
               <div className="display-4 mt-3 float-right">
-                <Link to="/neuer-auftrag" className="btn btn-secondary ml-1">
+                <Link to="/neu-auftrag" className="btn btn-secondary ml-1">
                   Neuer Auftrag
                 </Link>
                 <Link to="/neu-nutzer" className="btn btn-secondary ml-1">

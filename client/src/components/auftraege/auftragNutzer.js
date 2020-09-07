@@ -7,11 +7,11 @@ import { withRouter } from 'react-router-dom';
 //import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import {deleteNutzer, getNutzers} from '../../actions/nutzerActions';
-import Pagination from './Pagination'
+import Pagination from '../layout/Pagination'
 
 
 
-class myPosts extends Component {
+class AuftragNutzer extends Component {
     constructor(props) {
         super(props);
 
@@ -84,9 +84,9 @@ class myPosts extends Component {
                         <td>{nutzer.vorname}</td>
                         <td>{nutzer.nachname}</td>
                         <td>{nutzer.code}</td>
-                        <td><Link to={`/nutzerauftraege/${nutzer.code}`} className="btn btn-info">Aufträge bearbeiten</Link></td>
-                        <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-secondary">Nutzer bearbeiten</Link></td>
-                        <td><button onClick={this.onDeleteClick.bind(this, nutzer.code)} className="btn btn-danger">Nutzer löschen</button></td>
+                        {/* <td><Link to={`/nutzerauftraege/${nutzer.code}`} className="btn btn-info">Aufträge bearbeiten</Link></td>
+                        <td><Link to={`/postedit/${nutzer._id}`} className="btn btn-secondary">Nutzer bearbeiten</Link></td> */}
+                        <td><button onClick={this.onDeleteClick.bind(this, nutzer.code)} className="btn btn-info">Nutzer auswählen</button></td>
                     </tr>
                     </React.Fragment>
                     
@@ -101,15 +101,16 @@ class myPosts extends Component {
 
         return (
             <div>
-                <h4 className="mb-4">Nutzerliste</h4>
+                {/* import Kundenliste from "./auftragKunden";
+ */}
                 <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>Vorname</th>
                             <th>Nachname</th>
                             <th>Code</th>
-                            <th></th>
-                            <th></th>
+                            {/* <th></th>
+                            <th></th> */}
                             <th></th>
                         </tr>
                         </thead>
@@ -127,7 +128,7 @@ class myPosts extends Component {
     }
 }
 
-myPosts.propTypes = {
+AuftragNutzer.propTypes = {
     nutzer: PropTypes.object.isRequired,
     deleteNutzer: PropTypes.func.isRequired,
     getNutzers: PropTypes.func.isRequired
@@ -138,4 +139,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {deleteNutzer, getNutzers})(withRouter(myPosts));
+export default connect(mapStateToProps, {deleteNutzer, getNutzers})(withRouter(AuftragNutzer));
